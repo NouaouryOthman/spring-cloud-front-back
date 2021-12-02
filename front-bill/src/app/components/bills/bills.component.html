@@ -1,0 +1,61 @@
+<h1 class="text text-center">Bills Table</h1>
+<div class="container" *ngIf="bills">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Date</th>
+      <th>ID Client</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let b of bills._embedded.bills">
+      <td>{{b.id}}</td>
+      <td>{{b.billingDate}}</td>
+      <td>{{b.customerID}}</td>
+      <td><span class="fa btn btn-info fa-eye" (click)="onGetBill(b.id)"></span></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="fullBill" class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      Bill
+    </div>
+    <div class="card-body">
+      <div class="form-group">
+        <label>ID : </label>
+        <strong> {{fullBill.id}}</strong>
+      </div>
+      <div class="form-group">
+        <label>Billing Date :</label>
+        <strong> {{fullBill.billingDate}}</strong>
+      </div>
+      <div class="form-group">
+        <label>Customer's Email :</label>
+        <strong> {{fullBill.customer.email}}</strong>
+      </div>
+      <div class="form-group">
+        <label>Products :</label>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let product of fullBill.productItems">
+            <td>{{product.product.name}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.quantity}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
